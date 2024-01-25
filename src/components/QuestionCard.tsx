@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styles from './QuestionCard.module.css'
+import styles from './QuestionCard.module.scss'
 
 type PropsType = {
   _id: string

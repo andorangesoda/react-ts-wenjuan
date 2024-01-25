@@ -8,9 +8,15 @@ const ManageLayout: FC = () => {
       <div className={styles.left}>
         <p>ManageLayout navigation</p>
         <button>创建问卷</button>
-        <a href="#">我的问卷</a>
-        <a href="#">星标问卷</a>
-        <a href="#">回收站</a>
+        <p>
+          <a href="#">我的问卷</a>
+        </p>
+        <p>
+          <a href="#">星标问卷</a>
+        </p>
+        <p>
+          <a href="#">回收站</a>
+        </p>
       </div>
       <div className={styles.right}>
         <Outlet />
