@@ -72,3 +72,11 @@ const router = createBrowserRouter([
 ])
 
 export default router
+
+// 常用常量
+export const HOME = '/'
+export const LOGIN = '/login'
+export const REGISTER = '/register'
+export const MANAGE_LIST = '/manage/list'
+export const MANAGE_STAR = '/manage/star'
+export const MANAGE_TRASH = '/manage/trash'
