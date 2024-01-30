@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styles from './QuestionCard.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Divider, Space, Tag } from 'antd'
+import { Button, Divider, Space, Tag, Popconfirm, message } from 'antd'
 import {
   StarFilled,
   EditOutlined,
@@ -25,6 +25,14 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
   const { _id, title, isPubulished, answerCount, createdAt, isStar } = props
   const QUESTION_EDIT = `/question/edit/${_id}`
   const QUESTION_STAT = `/question/stat/${_id}`
+
+  const duplicate = () => {
+    message.success('复制成功！')
+  }
+  const del = () => {
+    message.success('删除成功！')
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -72,12 +80,21 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
             <Button type="text" size="small" icon={isStar ? <StarFilled /> : <StarOutlined />}>
               {isStar ? '取消' : '标星'}
             </Button>
-            <Button type="text" size="small" icon={<CopyOutlined />}>
-              复制
-            </Button>
-            <Button type="text" size="small" icon={<DeleteOutlined />}>
-              删除
-            </Button>
+            <Popconfirm
+              title="确定复制该问卷？"
+              okText="确定"
+              cancelText="取消"
+              onConfirm={duplicate}
+            >
+              <Button type="text" size="small" icon={<CopyOutlined />}>
+                复制
+              </Button>
+            </Popconfirm>
+            <Popconfirm title="确定删除该问卷？" okText="确定" cancelText="取消" onConfirm={del}>
+              <Button type="text" size="small" icon={<DeleteOutlined />}>
+                删除
+              </Button>
+            </Popconfirm>
           </Space>
         </div>
       </div>
