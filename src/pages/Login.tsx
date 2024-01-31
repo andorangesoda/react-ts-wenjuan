@@ -48,10 +48,22 @@ const Login: FC = () => {
           initialValues={{ remember: true }}
           form={form}
         >
-          <Form.Item label="用户名" name="username">
+          <Form.Item
+            name="username"
+            label="用户名"
+            rules={[
+              { required: true, message: '请输入用户名！' },
+              { type: 'string', min: 5, max: 20, message: '字符长度在 5-20 之间' },
+              { pattern: /^\w+&/, message: '只能是字母/数字/下划线' },
+            ]}
+          >
             <Input />
           </Form.Item>
-          <Form.Item label="密码" name="password">
+          <Form.Item
+            name="password"
+            label="密码"
+            rules={[{ required: true, message: '请输入密码！' }]}
+          >
             <Input.Password />
           </Form.Item>
           <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 6, span: 18 }}>
