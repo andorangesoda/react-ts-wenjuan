@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import QuestionCard from '../../components/QuestionCard'
-import ListSearch from '../../components/ListSearch'
+import QuestionCard from '@/components/QuestionCard'
+import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
 import { Empty, Typography } from 'antd'
 

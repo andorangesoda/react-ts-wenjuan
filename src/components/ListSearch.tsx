@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { Input } from 'antd'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
-import { LIST_SEARCH_PRIMARY_KEY } from '../constant'
+import { LIST_SEARCH_PRIMARY_KEY } from '@/constant/index'
 
 const { Search } = Input
 

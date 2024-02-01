@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import ListSearch from '../../components/ListSearch'
+import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
 import { Typography, Space, Button, Empty, Tag, Table, Modal, message } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'

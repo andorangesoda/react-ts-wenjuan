@@ -1,4 +1,4 @@
-import { USERNAME, PASSWORD } from '../constant/index'
+import { USERNAME, PASSWORD } from '@/constant/index'
 
 /**
  * 「记住我」相关的操作

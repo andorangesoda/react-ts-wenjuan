@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styles from './ManageLayout.module.scss'
 import { Button, Space } from 'antd'
 import { PlusCircleTwoTone, FileTextTwoTone, StarTwoTone, DeleteTwoTone } from '@ant-design/icons'
-import { MANAGE_LIST, MANAGE_STAR, MANAGE_TRASH } from '../router'
+import { MANAGE_LIST, MANAGE_STAR, MANAGE_TRASH } from '@/router/index'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()

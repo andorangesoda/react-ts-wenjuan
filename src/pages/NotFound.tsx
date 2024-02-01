@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Button, Result } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { MANAGE_LIST } from '../router'
+import { MANAGE_LIST } from '@/router/index'
 
 const NotFound: FC = () => {
   const nav = useNavigate()

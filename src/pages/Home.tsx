@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styles from './Home.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { MANAGE_LIST } from '../router'
+import { MANAGE_LIST } from '@/router/index'
 import { Button, Typography } from 'antd'
 const { Title, Paragraph } = Typography
 

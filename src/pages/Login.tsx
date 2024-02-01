@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Space, Typography, Form, Input, Button, Checkbox } from 'antd'
 import { LoginOutlined } from '@ant-design/icons'
 import styles from './Login.module.scss'
-import { REGISTER } from '../router/index'
-import { rememberUser, deleteUserFromStorage, getUserFromStorage } from '../utils/localStorage'
+import { REGISTER } from '@/router/index'
+import { rememberUser, deleteUserFromStorage, getUserFromStorage } from '@/utils/localStorage'
 
 const { Title } = Typography
 
