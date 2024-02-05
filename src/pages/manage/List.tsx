@@ -1,34 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
-import { Typography, Empty } from 'antd'
+import { Typography, Spin } from 'antd'
+import useLoadQuestionListData from '@/hooks/useLoadQuestionListData'
 
 const { Title } = Typography
 
-const rawQuestionList = [
-  {
-    _id: '1',
-    title: '问卷1',
-    isPubulished: false,
-    isStar: false,
-    answerCount: 3,
-    createdAt: '2024-01-25',
-  },
-  {
-    _id: '2',
-    title: '问卷',
-    isPubulished: true,
-    isStar: true,
-    answerCount: 5,
-    createdAt: '2024-01-25',
-  },
-]
-
 // FC 是 react 一种组件写法，用于声明无状态的函数组件。FC 是一个泛型接口，接受一个类型参数，表示组件的 props。
 const List: FC = () => {
-  //const [questionList, setQuestionList] = useState(rawQuestionList)
-  const questionList = rawQuestionList
+  const { data = {}, loading } = useLoadQuestionListData()
+  const { list = [] } = data
+
   return (
     <>
       <div className={styles.header}>
@@ -40,13 +24,18 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {questionList.length === 0 && <Empty description="暂无数据" />}
-        {questionList.length > 0 &&
-          questionList.map(item => {
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
+        {!loading &&
+          list.length > 0 &&
+          list.map((item: any) => {
             return <QuestionCard key={item._id} {...item} />
           })}
       </div>
-      <div className={styles.footer}>底部-分页</div>
+      <div className={styles.footer}>上划加载更多...</div>
     </>
   )
 }
