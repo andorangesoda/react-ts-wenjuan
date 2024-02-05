@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { Input } from 'antd'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
-import { LIST_SEARCH_PRIMARY_KEY } from '@/constant/index'
+import { LIST_SEARCH_PARAM_KEY } from '@/constant/index'
 
 const { Search } = Input
 
@@ -18,14 +18,14 @@ const ListSearch: FC = () => {
   const handleSearch = () => {
     nav({
       pathname,
-      search: `${LIST_SEARCH_PRIMARY_KEY}=${value}`,
+      search: `${LIST_SEARCH_PARAM_KEY}=${value}`,
     })
   }
 
   // 获取 url 参数，并设置到 value
   const [searchParams] = useSearchParams()
   useEffect(() => {
-    const newVal = searchParams.get(LIST_SEARCH_PRIMARY_KEY) || ''
+    const newVal = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
     setValue(newVal)
   }, [searchParams])
 
