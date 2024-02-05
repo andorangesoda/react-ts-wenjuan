@@ -1,24 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
-import { Empty, Typography } from 'antd'
+import { Spin, Typography } from 'antd'
+import useLoadQuestionListData from '@/hooks/useLoadQuestionListData'
 
 const { Title } = Typography
 
-const rawQuestionList = [
-  {
-    _id: '2',
-    title: '问卷',
-    isPubulished: true,
-    isStar: true,
-    answerCount: 5,
-    createdAt: '2024-01-25',
-  },
-]
 const Star: FC = () => {
-  //const [questionList, setQuestionList] = useState(rawQuestionList)
-  const questionList = rawQuestionList
+  const { data = {}, loading } = useLoadQuestionListData({ isStar: true })
+  const { list = [] } = data
 
   return (
     <>
@@ -31,9 +23,14 @@ const Star: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {questionList.length === 0 && <Empty />}
-        {questionList.length > 0 &&
-          questionList.map(item => {
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
+        {!loading &&
+          list.length > 0 &&
+          list.map((item: any) => {
             return <QuestionCard key={item._id} {...item} />
           })}
       </div>

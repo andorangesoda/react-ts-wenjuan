@@ -1,26 +1,17 @@
 import React, { FC, useState } from 'react'
 import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
-import { Typography, Space, Button, Empty, Tag, Table, Modal, message } from 'antd'
+import { Typography, Space, Button, Spin, Tag, Table, Modal, message } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
+import useLoadQuestionListData from '@/hooks/useLoadQuestionListData'
 
 const { Title } = Typography
 const { confirm } = Modal
 
-const rawQuestionList = [
-  {
-    _id: '3',
-    title: '问卷3',
-    isPubulished: true,
-    isStar: true,
-    answerCount: 5,
-    createdAt: '2024-01-25',
-  },
-]
-
 const Trash: FC = () => {
-  //const [questionList, setQuestionList] = useState(rawQuestionList)
-  const questionList = rawQuestionList
+  const { data = {}, loading } = useLoadQuestionListData({ isDeleted: true })
+  const { list = [] } = data
+
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
   const tableColumns = [
@@ -71,7 +62,7 @@ const Trash: FC = () => {
         <Table
           rowKey={q => q._id}
           columns={tableColumns}
-          dataSource={questionList}
+          dataSource={list}
           pagination={false}
           rowSelection={{
             type: 'checkbox',
@@ -95,8 +86,12 @@ const Trash: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {questionList.length === 0 && <Empty description="暂无数据" />}
-        {questionList.length > 0 && TableElem}
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
+        {!loading && list.length > 0 && TableElem}
       </div>
       <div className={styles.footer}>分页</div>
     </>
