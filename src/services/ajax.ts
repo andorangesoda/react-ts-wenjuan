@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios'
 import { message } from 'antd'
+import { getToken } from '@/utils/localStorage'
 
 export type ResType = {
   errno: number
@@ -15,6 +16,16 @@ export type ResDataType = {
 const instance = axios.create({
   timeout: 10 * 1000,
 })
+
+// request 拦截：每次请求都带上 token
+instance.interceptors.request.use(
+  config => {
+    config.headers['Authorization'] = `Bearer ${getToken()}` // JWT 的固定格式
+    return config
+  },
+  error => Promise.reject(error)
+)
+
 // 拦截响应，统一处理 errno 和 msg
 instance.interceptors.response.use(res => {
   const { errno, msg, data } = (res.data || {}) as ResType

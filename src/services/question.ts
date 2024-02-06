@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { ResDataType } from './axios'
+import axios, { ResDataType } from './ajax'
 
 type SearchOption = {
   keyword: string

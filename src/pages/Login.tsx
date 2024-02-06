@@ -1,34 +1,58 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Space, Typography, Form, Input, Button, Checkbox } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
+import { Space, Typography, Form, Input, Button, Checkbox, message } from 'antd'
 import { LoginOutlined } from '@ant-design/icons'
 import styles from './Login.module.scss'
-import { REGISTER } from '@/router/index'
-import { rememberUser, deleteUserFromStorage, getUserFromStorage } from '@/utils/localStorage'
+import { MANAGE_LIST, REGISTER } from '@/router/index'
+import {
+  rememberUser,
+  deleteUserFromStorage,
+  getUserFromStorage,
+  setToken,
+} from '@/utils/localStorage'
+import { useRequest } from 'ahooks'
+import { loginService } from '@/services/user'
 
 const { Title } = Typography
 
 const Login: FC = () => {
+  const nav = useNavigate()
   // 利用 antd 中的 hook 获取
   const [form] = Form.useForm()
 
   useEffect(() => {
     const { username, password } = getUserFromStorage()
     // 获取到用户信息后，填充到 form 表单中
-    console.log('username, password', username, password)
     form.setFieldsValue({ username, password })
   }, [])
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onFinish = (values: any) => {
-    console.log('Success:', values)
     const { username, password, remember } = values || {}
+    // 执行登录操作
+    run(username, password)
     if (remember) {
       rememberUser(username, password)
     } else {
       deleteUserFromStorage()
     }
   }
+
+  const { run } = useRequest(
+    async (username: string, password: string) => {
+      return await loginService(username, password)
+    },
+    {
+      manual: true,
+      onSuccess(result) {
+        const { token = '' } = result
+        // 存储 token
+        setToken(token)
+        nav(MANAGE_LIST)
+        message.success('登录成功')
+      },
+    }
+  )
 
   return (
     <div className={styles.container}>
@@ -54,7 +78,7 @@ const Login: FC = () => {
             rules={[
               { required: true, message: '请输入用户名！' },
               { type: 'string', min: 5, max: 20, message: '字符长度在 5-20 之间' },
-              { pattern: /^\w+&/, message: '只能是字母/数字/下划线' },
+              { pattern: /^\w+$/, message: '只能是字母/数字/下划线' },
             ]}
           >
             <Input />

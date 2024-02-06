@@ -1,17 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
-import { Space, Typography, Form, Input, Button } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
+import { Space, Typography, Form, Input, Button, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
 import { LOGIN } from '@/router/index'
+import { useRequest } from 'ahooks'
+import { registerService } from '@/services/user'
 
 const { Title } = Typography
 
 const Register: FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const nav = useNavigate()
+
   const onFinish = (values: any) => {
-    console.log('Success:', values)
+    run(values)
   }
+
+  const { run } = useRequest(
+    async values => {
+      const { username, password } = values
+      const data = await registerService(username, password)
+      return data
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success('注册成功')
+        // 跳转到登录页
+        nav(LOGIN)
+      },
+    }
+  )
 
   return (
     <div className={styles.container}>
