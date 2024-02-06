@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
-import { Spin, Typography } from 'antd'
+import { Empty, Spin, Typography } from 'antd'
 import useLoadQuestionListData from '@/hooks/useLoadQuestionListData'
 import ListPage from '@/components/ListPage'
 
@@ -27,6 +27,11 @@ const Star: FC = () => {
         {loading && (
           <div style={{ textAlign: 'center' }}>
             <Spin />
+          </div>
+        )}
+        {!loading && list.length === 0 && (
+          <div>
+            <Empty description="暂无数据" />
           </div>
         )}
         {!loading &&

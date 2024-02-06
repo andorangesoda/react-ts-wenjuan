@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import ListSearch from '@/components/ListSearch'
 import styles from './common.module.scss'
-import { Typography, Space, Button, Spin, Tag, Table, Modal, message } from 'antd'
+import { Typography, Space, Button, Spin, Tag, Table, Modal, message, Empty } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import useLoadQuestionListData from '@/hooks/useLoadQuestionListData'
 import ListPage from '@/components/ListPage'
@@ -126,6 +126,11 @@ const Trash: FC = () => {
         {loading && (
           <div style={{ textAlign: 'center' }}>
             <Spin />
+          </div>
+        )}
+        {!loading && list.length === 0 && (
+          <div>
+            <Empty description="暂无数据" />
           </div>
         )}
         {!loading && list.length > 0 && TableElem}
