@@ -80,3 +80,13 @@ export const REGISTER = '/register'
 export const MANAGE_LIST = '/manage/list'
 export const MANAGE_STAR = '/manage/star'
 export const MANAGE_TRASH = '/manage/trash'
+
+export function isLoginOrRegister(pathname: string) {
+  if ([LOGIN, REGISTER].includes(pathname)) return true
+  return false
+}
+
+export function isNoNeedUserInfo(pathname: string) {
+  if ([HOME, LOGIN, REGISTER].includes(pathname)) return true
+  return false
+}
