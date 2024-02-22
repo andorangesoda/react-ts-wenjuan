@@ -1,8 +1,10 @@
 import React, { FC } from 'react'
 import styles from './index.module.scss'
 import EditCanvas from './EditCanvas'
+import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 
 const Edit: FC = () => {
+  // 从 ajax 中加载数据，并存到 redux store
   const { loading } = useLoadQuestionData()
 
   return (
