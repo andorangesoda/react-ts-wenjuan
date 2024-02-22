@@ -19,3 +19,7 @@
   // 屏蔽鼠标行为
   pointer-events: none;
 }
+
+.selected {
+  border-color: #1890ff !important;
+}

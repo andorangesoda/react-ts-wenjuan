@@ -1,9 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent } from 'react'
 import styles from './EditCanvas.module.scss'
 import { Spin } from 'antd'
-import { ComponentInfoType } from '@/store/componentsReducer'
+import { ComponentInfoType, changeSelectedId } from '@/store/componentsReducer'
 import { getComponentConfByType } from '@/components/QuestionComponents'
 import useGetComponentInfo from '@/hooks/useGetComponentInfo'
+import classNames from 'classnames'
+import { useDispatch } from 'react-redux'
 
 type PropsType = {
   loading: boolean
@@ -21,7 +23,14 @@ function getComponent(componentInfo: ComponentInfoType) {
 // 渲染画布
 const EditCanvas: FC<PropsType> = ({ loading }) => {
   // 从 redux stroe 中获取之前加载时，存到 redux store 中的数据
-  const { componentList } = useGetComponentInfo()
+  const { componentList, selectedId } = useGetComponentInfo()
+  const dispatch = useDispatch()
+
+  function handleClick(event: MouseEvent, fe_id: string) {
+    // 阻止选择事件冒泡
+    event.stopPropagation()
+    dispatch(changeSelectedId(fe_id))
+  }
 
   if (loading) {
     return (
@@ -35,8 +44,19 @@ const EditCanvas: FC<PropsType> = ({ loading }) => {
     <div className={styles.canvas}>
       {componentList.map(c => {
         const { fe_id } = c
+
+        // 拼接 classname
+        const wrapperDefaultClassName = styles['component-wrapper']
+        const selectedClassName = styles.selected
+        const wrapperClassName = classNames({
+          [wrapperDefaultClassName]: true,
+          // 选中时添加样式
+          [selectedClassName]: fe_id === selectedId,
+        })
+
         return (
-          <div key={fe_id} className={styles['component-wrapper']}>
+          <div key={fe_id} className={wrapperClassName} onClick={e => handleClick(e, fe_id)}>
+            {/* 渲染对应组件 */}
             <div className={styles.component}>{getComponent(c)}</div>
           </div>
         )
