@@ -1,4 +1,4 @@
-import Components from './Component'
+import Component from './Component'
 import { QuestionInputDefaultProps } from './interface'
 
 export * from './interface'
@@ -6,6 +6,6 @@ export * from './interface'
 export default {
   title: '输入框',
   type: 'questionInput',
-  Components,
+  Component,
   defaultProps: QuestionInputDefaultProps,
 }
