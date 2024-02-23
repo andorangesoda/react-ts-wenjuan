@@ -26,10 +26,10 @@ const EditCanvas: FC<PropsType> = ({ loading }) => {
   const { componentList, selectedId } = useGetComponentInfo()
   const dispatch = useDispatch()
 
-  function handleClick(event: MouseEvent, fe_id: string) {
+  function handleClick(event: MouseEvent, id: string) {
     // 阻止选择事件冒泡
     event.stopPropagation()
-    dispatch(changeSelectedId(fe_id))
+    dispatch(changeSelectedId(id))
   }
 
   if (loading) {

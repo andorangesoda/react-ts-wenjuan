@@ -4,6 +4,6 @@ export type QuestionInputPropsType = {
 }
 
 export const QuestionInputDefaultProps: QuestionInputPropsType = {
-  title: '输入框标题',
+  title: '输入框',
   placeholder: '请输入...',
 }

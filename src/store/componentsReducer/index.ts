@@ -1,6 +1,5 @@
 import { ComponentPropsType } from '@/components/QuestionComponents'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import produce from 'immer'
 
 export type ComponentInfoType = {
   fe_id: string
@@ -28,9 +27,9 @@ export const componentsSlice = createSlice({
     resetComponents: (state: ComponentsStateType, action: PayloadAction<ComponentsStateType>) => {
       return action.payload
     },
-    changeSelectedId: produce((draft: ComponentsStateType, action: PayloadAction<string>) => {
+    changeSelectedId: (draft: ComponentsStateType, action: PayloadAction<string>) => {
       draft.selectedId = action.payload
-    }),
+    },
   },
 })
 
