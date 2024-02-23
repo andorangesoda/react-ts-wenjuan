@@ -1,12 +1,16 @@
 import { ComponentPropsType, getComponentConfByType } from '@/components/QuestionComponents'
 import useGetComponentInfo from '@/hooks/useGetComponentInfo'
+import { changeComponentProps } from '@/store/componentsReducer'
 import React, { FC } from 'react'
+import { useDispatch } from 'react-redux'
 
 const NoProp: FC = () => {
   return <div style={{ textAlign: 'center' }}>未选中组件</div>
 }
 
 const ComponentProp: FC = () => {
+  const dispatch = useDispatch()
+
   // 获取当前选中的组件
   const { selectedComponent } = useGetComponentInfo()
   if (!selectedComponent) return <NoProp />
@@ -17,7 +21,9 @@ const ComponentProp: FC = () => {
   if (!componentConf) return <NoProp />
 
   function changeProps(newProps: ComponentPropsType) {
-    console.log('newProps', newProps)
+    if (!selectedComponent) return
+    const { fe_id } = selectedComponent
+    dispatch(changeComponentProps({ fe_id, newProps }))
   }
 
   // 渲染组件属性
