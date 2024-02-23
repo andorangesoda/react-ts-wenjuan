@@ -2,14 +2,30 @@ import React, { FC } from 'react'
 import { Typography } from 'antd'
 import { ComponentConfType, componentConfGroup } from '@/components/QuestionComponents'
 import styles from './ComponentLib.module.scss'
+import { useDispatch } from 'react-redux'
+import { nanoid } from 'nanoid'
+import { addComponent } from '@/store/componentsReducer'
 
 const { Title } = Typography
 
 function getComponent(c: ComponentConfType) {
-  const { type, Component } = c
+  const { title, type, Component, defaultProps } = c
+  const dispatch = useDispatch()
+
+  function handleClick() {
+    dispatch(
+      addComponent({
+        // 前端生成的 id
+        fe_id: nanoid(),
+        title,
+        type,
+        props: defaultProps,
+      })
+    )
+  }
 
   return (
-    <div key={type} className={styles.wrapper}>
+    <div key={type} className={styles.wrapper} onClick={handleClick}>
       <div className={styles.component}>
         <Component />
       </div>
