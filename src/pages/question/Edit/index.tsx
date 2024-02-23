@@ -5,6 +5,7 @@ import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import { useDispatch } from 'react-redux'
 import { changeSelectedId } from '@/store/componentsReducer'
 import LeftPanel from './LeftPanel'
+import RightPanel from './RightPanel'
 
 const Edit: FC = () => {
   // 从 ajax 中加载数据，并存到 redux store
@@ -29,7 +30,9 @@ const Edit: FC = () => {
               <EditCanvas loading={loading} />
             </div>
           </div>
-          <div className={styles.right}>right</div>
+          <div className={styles.right}>
+            <RightPanel />
+          </div>
         </div>
       </div>
     </div>
