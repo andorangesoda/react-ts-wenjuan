@@ -1,4 +1,4 @@
-import { getComponentConfByType } from '@/components/QuestionComponents'
+import { ComponentPropsType, getComponentConfByType } from '@/components/QuestionComponents'
 import useGetComponentInfo from '@/hooks/useGetComponentInfo'
 import React, { FC } from 'react'
 
@@ -15,10 +15,14 @@ const ComponentProp: FC = () => {
   const { type, props } = selectedComponent
   const componentConf = getComponentConfByType(type)
   if (!componentConf) return <NoProp />
-  const { PropComponent } = componentConf
+
+  function changeProps(newProps: ComponentPropsType) {
+    console.log('newProps', newProps)
+  }
 
   // 渲染组件属性
-  return <PropComponent {...props} />
+  const { PropComponent } = componentConf
+  return <PropComponent {...props} onChange={changeProps} />
 }
 
 export default ComponentProp

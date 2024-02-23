@@ -3,7 +3,7 @@ import { QuestionInputPropsType } from './interface'
 import { Form, Input } from 'antd'
 
 const PropComponent: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) => {
-  const { title, placeholder } = props
+  const { title, placeholder, onChange } = props
   const [form] = Form.useForm()
 
   // 监听属性变化，即使更新为最新属性
@@ -11,8 +11,20 @@ const PropComponent: FC<QuestionInputPropsType> = (props: QuestionInputPropsType
     form.setFieldsValue({ title, placeholder })
   }, [title, placeholder])
 
+  // form 表单内容变化时，触发 onChange
+  function handleValueChange() {
+    if (onChange) {
+      onChange(form.getFieldsValue())
+    }
+  }
+
   return (
-    <Form layout="vertical" initialValues={{ title, placeholder }} form={form}>
+    <Form
+      layout="vertical"
+      onValuesChange={handleValueChange}
+      initialValues={{ title, placeholder }}
+      form={form}
+    >
       <Form.Item
         label="标题"
         name="title"
