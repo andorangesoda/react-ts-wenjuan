@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { changeSelectedId } from '@/store/componentsReducer'
 import LeftPanel from './LeftPanel'
 import RightPanel from './RightPanel'
+import EditHeader from './EditHeader'
 
 const Edit: FC = () => {
   // 从 ajax 中加载数据，并存到 redux store
@@ -19,7 +20,9 @@ const Edit: FC = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>Header</div>
+      <div className={styles.header}>
+        <EditHeader />
+      </div>
       <div className={styles['content-wrapper']}>
         <div className={styles.content}>
           <div className={styles.left}>
