@@ -42,25 +42,27 @@ const EditCanvas: FC<PropsType> = ({ loading }) => {
 
   return (
     <div className={styles.canvas}>
-      {componentList.map(c => {
-        const { fe_id } = c
+      {componentList
+        .filter(c => !c.isHidden)
+        .map(c => {
+          const { fe_id } = c
 
-        // 拼接 classname
-        const wrapperDefaultClassName = styles['component-wrapper']
-        const selectedClassName = styles.selected
-        const wrapperClassName = classNames({
-          [wrapperDefaultClassName]: true,
-          // 选中时添加样式
-          [selectedClassName]: fe_id === selectedId,
-        })
+          // 拼接 classname
+          const wrapperDefaultClassName = styles['component-wrapper']
+          const selectedClassName = styles.selected
+          const wrapperClassName = classNames({
+            [wrapperDefaultClassName]: true,
+            // 选中时添加样式
+            [selectedClassName]: fe_id === selectedId,
+          })
 
-        return (
-          <div key={fe_id} className={wrapperClassName} onClick={e => handleClick(e, fe_id)}>
-            {/* 渲染对应组件 */}
-            <div className={styles.component}>{getComponent(c)}</div>
-          </div>
-        )
-      })}
+          return (
+            <div key={fe_id} className={wrapperClassName} onClick={e => handleClick(e, fe_id)}>
+              {/* 渲染对应组件 */}
+              <div className={styles.component}>{getComponent(c)}</div>
+            </div>
+          )
+        })}
     </div>
   )
 }
