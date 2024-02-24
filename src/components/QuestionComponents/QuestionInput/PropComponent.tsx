@@ -3,7 +3,7 @@ import { QuestionInputPropsType } from './interface'
 import { Form, Input } from 'antd'
 
 const PropComponent: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) => {
-  const { title, placeholder, onChange } = props
+  const { title, placeholder, onChange, disabled } = props
   const [form] = Form.useForm()
 
   // 监听属性变化，即使更新为最新属性
@@ -24,6 +24,7 @@ const PropComponent: FC<QuestionInputPropsType> = (props: QuestionInputPropsType
       onValuesChange={handleValueChange}
       initialValues={{ title, placeholder }}
       form={form}
+      disabled={disabled}
     >
       <Form.Item
         label="标题"

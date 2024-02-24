@@ -16,7 +16,7 @@ const ComponentProp: FC = () => {
   if (!selectedComponent) return <NoProp />
 
   // 根据组件的 type 获取组件配置，从而获取组件属性 PropComponent
-  const { type, props } = selectedComponent
+  const { type, props, isHidden, isLocked } = selectedComponent
   const componentConf = getComponentConfByType(type)
   if (!componentConf) return <NoProp />
 
@@ -28,7 +28,7 @@ const ComponentProp: FC = () => {
 
   // 渲染组件属性
   const { PropComponent } = componentConf
-  return <PropComponent {...props} onChange={changeProps} />
+  return <PropComponent {...props} onChange={changeProps} disabled={isLocked || isHidden} />
 }
 
 export default ComponentProp
