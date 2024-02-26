@@ -59,6 +59,10 @@
     flex: 0 0 auto;
     width: 280px;
     padding: 0 12px;
+    /* 启用垂直滚动 */
+    overflow-y: auto; 
+    /* 考虑到header的高度，这里减去了50px，也可以根据需要进行调整 */
+    max-height: calc(100vh - 62px); 
     background-color: #fff;
   }
 }
