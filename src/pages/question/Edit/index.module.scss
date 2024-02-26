@@ -21,9 +21,14 @@
   height: 100%;
 
   .left {
+    flex: 0 0 auto;
     width: 275px;
-    background-color: #fff;
     padding: 0 12px;
+    /* 启用垂直滚动 */
+    overflow-y: auto; 
+    /* 考虑到header的高度，这里减去了50px，也可以根据需要进行调整 */
+    max-height: calc(100vh - 62px); 
+    background-color: #fff;
   }
 
   .main {
@@ -33,6 +38,12 @@
 
     .canvas-wrapper{
       position: absolute;
+
+      flex: auto;
+      padding: 12px 0;
+      /* 允许内容撑开容器 */
+      min-height: 0; 
+
       width: 400px;
       height: 712px;
       top: 50%;
@@ -45,8 +56,9 @@
   }
 
   .right{
+    flex: 0 0 auto;
     width: 280px;
-    background-color: #fff;
     padding: 0 12px;
+    background-color: #fff;
   }
 }
