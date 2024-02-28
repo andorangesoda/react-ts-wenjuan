@@ -15,7 +15,7 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo'
 function isActiveElementValid() {
   const activeElem = document.activeElement
   if (activeElem === document.body) return true
-  // dnd-kit 处理拖拽排序可能导致的问题
+  // dnd-kit 处理引入拖拽排序后，document.activeElement 为 div[role="button"] 的情况，也视为合法
   if (activeElem?.matches('div[role="button"]')) return true
   return false
 }
