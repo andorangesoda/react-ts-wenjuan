@@ -33,7 +33,14 @@ function useLoadQuestionData() {
   // 根据获取的 data 设置 redux store
   useEffect(() => {
     if (!data) return
-    const { title = '', desc = '', js = '', css = '', componentList = [] } = data
+    const {
+      title = '',
+      desc = '',
+      js = '',
+      css = '',
+      isPublished = false,
+      componentList = [],
+    } = data
 
     // 获取默认的 selectedId
     let selectedId = ''
@@ -45,7 +52,7 @@ function useLoadQuestionData() {
     dispatch(resetComponents({ componentList, selectedId, copiedComponent: null }))
 
     // 把 pageInfo 存储到 redux store
-    dispatch(resetPageInfo({ title, desc, js, css }))
+    dispatch(resetPageInfo({ title, desc, js, css, isPublished }))
   }, [data])
 
   return { loading, error }
