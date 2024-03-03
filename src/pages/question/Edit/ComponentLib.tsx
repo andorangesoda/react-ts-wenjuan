@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Typography } from 'antd'
 import { ComponentConfType, componentConfGroup } from '@/components/QuestionComponents'
 import styles from './ComponentLib.module.scss'
@@ -12,7 +12,8 @@ function getComponent(c: ComponentConfType) {
   const { title, type, Component, defaultProps } = c
   const dispatch = useDispatch()
 
-  function handleClick() {
+  // 缓存函数
+  const handleClick = useCallback(() => {
     dispatch(
       addComponent({
         // 前端生成的 id
@@ -22,7 +23,7 @@ function getComponent(c: ComponentConfType) {
         props: defaultProps,
       })
     )
-  }
+  }, [])
 
   return (
     <div key={type} className={styles.wrapper} onClick={handleClick}>
