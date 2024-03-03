@@ -3,16 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export type PageInfoType = {
   title: string
   desc?: string
-  js?: string
-  css?: string
   isPublished?: boolean
 }
 
 const INIT_STATE: PageInfoType = {
   title: '',
   desc: '',
-  js: '',
-  css: '',
 }
 
 const pageInfoSlice = createSlice({
